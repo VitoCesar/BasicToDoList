@@ -1,0 +1,73 @@
+.item{
+  width: 25%;
+  height: 12vh;
+  padding: 0px 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #fa7f72;
+  background-color: whitesmoke;
+}
+
+.completed{
+  text-decoration: line-through;
+}
+
+.controlButtons{
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  gap: 5px;
+}
+
+.controlButtons button{
+  padding: 0.5vh;
+  border: none;
+  border-radius: 35px;
+  background-color: #add8e6;
+  color: #111111;
+  cursor: pointer;
+}
+
+.controlButtons .delete{
+  background-color: #ff5252;
+}
+
+.controlButtons input[type="checkbox"]{
+  width: 45px;
+  height: 20px;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: inset 0px 0px 4px 2px lightgray;
+  background-color: white;
+  appearance: none;
+  cursor: pointer;
+}
+
+.controlButtons input[type="checkbox"]:checked{
+  background-color: #ff5252;
+  box-shadow: inset 0px 0px 4px 2px #fa7f72;
+}
+
+.controlButtons input[type="checkbox"]::before{
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 4px 2px #fa7f72;
+  background-color: #ff5252;
+  transition: all 400ms;
+}
+
+.controlButtons input[type="checkbox"]:checked::before{
+  left: 25px;
+}

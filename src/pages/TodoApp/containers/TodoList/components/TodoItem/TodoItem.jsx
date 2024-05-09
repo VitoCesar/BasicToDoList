@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react"
+import styles from './TodoItem.module.css';
 
 function TodoItem({id, title, completed, onModalOpen, onStatus, onDelete}){
   const [isChecked, setIsChecked] = useState(completed)
@@ -8,18 +9,20 @@ function TodoItem({id, title, completed, onModalOpen, onStatus, onDelete}){
   useEffect(() => {
     onStatus(id, isChecked)
   }, [onStatus, id, isChecked])
-  const handleTitleUpdate = useCallback(() => {
+  const handleModalOpen = useCallback(() => {
     onModalOpen(id)
   }, [onModalOpen, id])
   const handleDelete = useCallback(() =>{
     onDelete(id)
   }, [onDelete, id])
   return (
-    <li>
-      <span>{title}</span>
-      <button onClick={handleTitleUpdate}>Editar Tarefa</button>
-      <input type="checkbox" value={isChecked} onChange={handleChange}/>
-      <button onClick={handleDelete}>Apagar</button>
+    <li className={styles.item}>
+      <span className={completed ? styles.completed : null}>{title}</span>
+      <div className={styles.controlButtons}>
+        <button onClick={handleModalOpen}>Editar Tarefa</button>
+        <input type="checkbox" value={isChecked} onChange={handleChange}/>
+        <button className={styles.delete} onClick={handleDelete}>Apagar</button>
+      </div>
     </li>
   )
 }
