@@ -18,13 +18,12 @@ function TodoList(){
     dispatchToTodos(todosActions.toggleTodoStatus(id, completed))
   }, [dispatchToTodos])
   const [currentId, setCurrentId] = useState(null)
-  const [modal, setModal] = useState(false)
+  
   const handleModalOpen = useCallback((id) => {
     setCurrentId(id)
-    setModal(true)
   }, [])
   const handleModalClose = useCallback(() => {
-    setModal(false)
+    setCurrentId(null)
   }, [])
   return (
     <div className={styles.container}>
@@ -44,7 +43,7 @@ function TodoList(){
           )
         })}
       </ul>
-      {modal && (
+      {currentId && (
         <TodoModal 
           id={currentId}
           onModalClose={handleModalClose} 
