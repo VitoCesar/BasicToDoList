@@ -25,6 +25,12 @@ function TodoList(){
   const handleModalClose = useCallback(() => {
     setCurrentId(null)
   }, [])
+  const getTitle = useCallback((id) => {
+    const currentTodo = todos.find((todo) => {
+      return todo.id === id
+    })
+    return currentTodo.title
+  }, [todos])
   return (
     <div className={styles.container}>
       <ul>
@@ -48,6 +54,7 @@ function TodoList(){
           id={currentId}
           onModalClose={handleModalClose} 
           onTitleUpdate={handleUpdate}
+          findTitle={getTitle}
           />
       )}
     </div>

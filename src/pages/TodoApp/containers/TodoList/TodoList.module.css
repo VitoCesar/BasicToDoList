@@ -3,7 +3,7 @@
   top: 140px;
   left: 0px;
   width: 100%;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 220px);
   padding: 4% 8%;
   background-color: rgb(165, 163, 163);
   overflow-y: scroll;

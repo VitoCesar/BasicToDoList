@@ -3,10 +3,10 @@ import { useFormik } from "formik";
 import * as yup from 'yup'
 import styles from './TodoModal.module.css'
 
-function TodoModal({ id, onModalClose, onTitleUpdate }){
+function TodoModal({ id, onModalClose, onTitleUpdate, findTitle }){
   const { getFieldProps, touched, errors, isValid, handleSubmit} = useFormik({
     initialValues: {
-      title: ''
+      title: findTitle(id)
     },
     validationSchema: yup.object({
       title: yup.string().required('Campo não pode ficar em branco')
