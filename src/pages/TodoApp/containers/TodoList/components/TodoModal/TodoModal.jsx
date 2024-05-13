@@ -4,13 +4,15 @@ import * as yup from 'yup'
 import styles from './TodoModal.module.css'
 
 function TodoModal({ id, onModalClose, onTitleUpdate, findTitle }){
-  const { getFieldProps, touched, errors, isValid, handleSubmit} = useFormik({
+  const { getFieldProps, errors, handleSubmit} = useFormik({
     initialValues: {
       title: findTitle(id)
     },
     validationSchema: yup.object({
       title: yup.string().required('Campo não pode ficar em branco')
     }),
+    validateOnChange:false,
+    validateOnBlur: false,
     //nao é necessario event.preventeDefault ao utilizar formik
     onSubmit: (values, formikBag) => {
       onTitleUpdate(id, values.title)
@@ -31,13 +33,12 @@ function TodoModal({ id, onModalClose, onTitleUpdate, findTitle }){
             autoComplete="off"
             {...getFieldProps('title')}
             />
-            {touched.title && errors.title ? (
+            {errors.title ? (
               <small className={styles.error}>{errors.title}</small>
             ): null}
             <button
               className={styles.submit}
-              type="submit" 
-              disabled={!isValid}
+              type="submit"
             >
               Editar
             </button>

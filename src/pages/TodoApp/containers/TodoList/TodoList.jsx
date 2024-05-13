@@ -3,7 +3,25 @@ import TodosContext from '../../../../state/todo/Context'
 import TodoItem from './components/TodoItem/TodoItem'
 import TodoModal from './components/TodoModal/TodoModal'
 import * as todosActions from '../../../../state/todo/actions'
+import FilterContext from '../../../../state/filter/Context'
 import styles from './TodoList.module.css'
+
+function filteredList(list, currentFilter) {
+  switch (currentFilter) {
+    case 'all':
+      return list
+    case 'active':
+      return list.filter((item) => {
+        return item.completed === false
+      })
+    case 'completed':
+      return list.filter((item) => {
+        return item.completed === true
+      })
+    default:
+      throw new Error()
+  }
+}
 
 function TodoList(){
   //destructing
@@ -31,10 +49,11 @@ function TodoList(){
     })
     return currentTodo.title
   }, [todos])
+  const { filter } = useContext(FilterContext)
   return (
     <div className={styles.container}>
       <ul>
-        {todos.map((todo) => {
+        {filteredList(todos, filter).map((todo) => {
           return (
             <TodoItem 
               key={todo.id} 

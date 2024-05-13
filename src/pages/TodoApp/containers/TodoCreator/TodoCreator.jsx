@@ -8,10 +8,12 @@ import styles from './TodoCreator.module.css'
 function TodoCreator(){
   //destruct
   const { dispatchToTodos } = useContext(TodosContext)
-  const { getFieldProps, touched, errors, isValid, handleSubmit} = useFormik({
+  const { getFieldProps, errors, handleSubmit} = useFormik({
     initialValues: {
       title: ''
     },
+    validateOnChange: false,
+    validateOnBlur: false,
     validationSchema: yup.object({
       title: yup.string().required('Campo não pode ficar em branco')
     }),
@@ -35,13 +37,12 @@ function TodoCreator(){
         ref={inputTitle}
         {...getFieldProps('title')}
         />
-        {touched.title && errors.title ? (
+        {errors.title ? (
           <small className={styles.error}>{errors.title}</small>
         ): null}
         <button 
           className={styles.submit}
-          type="submit" 
-          disabled={!isValid}
+          type="submit"
         >
           Adicionar
         </button>
